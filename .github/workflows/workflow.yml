@@ -41,13 +41,10 @@ jobs:
       uses: docker/setup-buildx-action@v2
 
     - name: Build test image
-      uses: docker/build-push-action@v4
-      with:
-        context: .
-        push: false
-        tags: erpnext-ithm:test
-        cache-from: type=gha
-        cache-to: type=gha,mode=max
+      run: |
+        echo "Building ERPNext test image..."
+        docker build -t erpnext-ithm:test .
+        echo "Image built successfully"
 
     - name: Test container startup
       run: |
