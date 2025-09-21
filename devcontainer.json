@@ -1,9 +1,7 @@
 {
   "name": "ERPNext Education Portal - ITHM",
-  "dockerComposeFile": "../docker-compose.yml",
-  "service": "erpnext",
+  "image": "frappe/erpnext:latest",
   "workspaceFolder": "/home/frappe/frappe-bench",
-  "shutdownAction": "stopCompose",
   "forwardPorts": [8000, 9000, 3306, 80],
   "portsAttributes": {
     "8000": {
@@ -50,7 +48,7 @@
       }
     }
   },
-  "postCreateCommand": "echo 'ERPNext Education Portal starting...' && sleep 10",
+  "postCreateCommand": "bash .devcontainer/setup.sh",
   "remoteUser": "frappe",
   "features": {
     "ghcr.io/devcontainers/features/git:1": {},

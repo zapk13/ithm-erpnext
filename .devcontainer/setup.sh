@@ -2,13 +2,14 @@
 
 echo "🚀 Setting up ERPNext Education Portal in Codespaces..."
 
+# Start services using docker-compose
+echo "🐳 Starting database and Redis services..."
+cd /workspaces/ithm-erpnext
+docker-compose up -d db redis-cache redis-queue redis-socketio
+
 # Wait for database to be ready
 echo "⏳ Waiting for database connection..."
-until mysqladmin ping -h"$DB_HOST" -P"$DB_PORT" -u"$DB_USER" -p"$DB_PASSWORD" --silent; do
-    echo "Waiting for database..."
-    sleep 2
-done
-echo "✅ Database is ready!"
+sleep 30
 
 # Check if site exists, if not create it
 if [ ! -d "/home/frappe/frappe-bench/sites/ithm.local" ]; then
