@@ -1,0 +1,25 @@
+{
+  "site_config": {
+    "db_name": "ithm_erpnext",
+    "db_password": "admin",
+    "admin_password": "admin",
+    "admin_email": "admin@ithm.edu.pk",
+    "site_name": "ithm.local",
+    "site_title": "ITHM - Institute of Tourism and Hospitality Management"
+  },
+  "company": {
+    "company_name": "Institute of Tourism and Hospitality Management",
+    "abbr": "ITHM",
+    "default_currency": "PKR",
+    "country": "Pakistan",
+    "timezone": "Asia/Karachi",
+    "date_format": "dd-mm-yyyy",
+    "time_format": "HH:mm:ss"
+  },
+  "education_settings": {
+    "academic_year": "2024-25",
+    "current_academic_year": "2024-25",
+    "academic_year_start_date": "2024-07-01",
+    "academic_year_end_date": "2025-06-30"
+  }
+}

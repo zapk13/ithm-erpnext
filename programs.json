@@ -1,0 +1,58 @@
+{
+  "programs": [
+    {
+      "program_name": "Bachelor of Tourism Management",
+      "program_code": "BTM",
+      "duration": "3 years",
+      "program_type": "Undergraduate",
+      "credits_required": 120,
+      "departments": ["Tourism Management"],
+      "campuses": ["Karachi", "Lahore", "Islamabad"]
+    },
+    {
+      "program_name": "Master of Hospitality Management", 
+      "program_code": "MHM",
+      "duration": "2 years",
+      "program_type": "Postgraduate",
+      "credits_required": 60,
+      "departments": ["Hospitality Management"],
+      "campuses": ["Karachi", "Lahore"]
+    },
+    {
+      "program_name": "Diploma in Tourism",
+      "program_code": "DIT",
+      "duration": "1 year", 
+      "program_type": "Diploma",
+      "credits_required": 40,
+      "departments": ["Tourism Management"],
+      "campuses": ["Karachi", "Lahore", "Islamabad"]
+    },
+    {
+      "program_name": "Certificate in Hotel Management",
+      "program_code": "CHM",
+      "duration": "6 months",
+      "program_type": "Certificate", 
+      "credits_required": 20,
+      "departments": ["Hotel Management"],
+      "campuses": ["Karachi", "Lahore"]
+    },
+    {
+      "program_name": "Bachelor of Event Management",
+      "program_code": "BEM",
+      "duration": "3 years",
+      "program_type": "Undergraduate",
+      "credits_required": 120,
+      "departments": ["Event Management"],
+      "campuses": ["Karachi", "Islamabad"]
+    },
+    {
+      "program_name": "Diploma in Culinary Arts",
+      "program_code": "DCA", 
+      "duration": "1 year",
+      "program_type": "Diploma",
+      "credits_required": 40,
+      "departments": ["Culinary Arts"],
+      "campuses": ["Karachi", "Lahore"]
+    }
+  ]
+}
