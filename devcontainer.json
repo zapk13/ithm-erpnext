@@ -1,0 +1,62 @@
+{
+  "name": "ERPNext Education Portal - ITHM",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "erpnext",
+  "workspaceFolder": "/home/frappe/frappe-bench",
+  "shutdownAction": "stopCompose",
+  "forwardPorts": [8000, 9000, 3306, 80],
+  "portsAttributes": {
+    "8000": {
+      "label": "ERPNext Web",
+      "onAutoForward": "notify"
+    },
+    "9000": {
+      "label": "Socket.IO",
+      "onAutoForward": "ignore"
+    },
+    "3306": {
+      "label": "MariaDB",
+      "onAutoForward": "ignore"
+    },
+    "80": {
+      "label": "Nginx",
+      "onAutoForward": "notify"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-vscode.vscode-json",
+        "ms-vscode.vscode-yaml",
+        "formulahendry.auto-rename-tag",
+        "bradlc.vscode-tailwindcss",
+        "ms-vscode-remote.remote-containers"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/home/frappe/frappe-bench/env/bin/python",
+        "python.terminal.activateEnvironment": true,
+        "python.linting.enabled": true,
+        "python.linting.pylintEnabled": true,
+        "editor.formatOnSave": true,
+        "files.associations": {
+          "*.py": "python",
+          "*.js": "javascript",
+          "*.html": "html",
+          "*.css": "css",
+          "*.json": "json"
+        }
+      }
+    }
+  },
+  "postCreateCommand": "bash .devcontainer/setup.sh",
+  "remoteUser": "frappe",
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "18"
+    }
+  }
+}

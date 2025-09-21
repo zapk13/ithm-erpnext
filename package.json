@@ -1,0 +1,47 @@
+{
+  "name": "erpnext-ithm-education-portal",
+  "version": "1.0.0",
+  "description": "ERPNext Education Portal for Institute of Tourism and Hospitality Management",
+  "main": "index.js",
+  "scripts": {
+    "start": "docker-compose up -d",
+    "stop": "docker-compose down",
+    "restart": "docker-compose restart",
+    "logs": "docker-compose logs -f",
+    "setup": "docker-compose up -d && docker-compose logs -f erpnext",
+    "reset": "docker-compose down -v && docker-compose up -d --build",
+    "backup": "docker-compose exec erpnext bench --site ithm.local backup",
+    "restore": "docker-compose exec erpnext bench --site ithm.local restore",
+    "migrate": "docker-compose exec erpnext bench --site ithm.local migrate",
+    "build": "docker-compose exec erpnext bench build",
+    "console": "docker-compose exec erpnext bench --site ithm.local console",
+    "shell": "docker-compose exec erpnext bash"
+  },
+  "keywords": [
+    "erpnext",
+    "education",
+    "portal",
+    "tourism",
+    "hospitality",
+    "management",
+    "student",
+    "academic",
+    "institute",
+    "codespaces"
+  ],
+  "author": "Institute of Tourism and Hospitality Management",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/erpnext-ithm-education-portal"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/erpnext-ithm-education-portal/issues"
+  },
+  "homepage": "https://github.com/your-username/erpnext-ithm-education-portal#readme",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "devDependencies": {},
+  "dependencies": {}
+}
