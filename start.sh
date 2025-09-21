@@ -13,12 +13,12 @@ until mysqladmin ping -h"$DB_HOST" -P"$DB_PORT" -u"$DB_USER" -p"$DB_PASSWORD" --
 done
 echo "Database is ready!"
 
-# Start supervisor
-echo "Starting supervisor..."
-supervisord -c /home/frappe/frappe-bench/config/supervisor.conf
-
-# Wait for services to start
-sleep 10
+# Initialize bench if not already done
+if [ ! -f "/home/frappe/frappe-bench/config/supervisor.conf" ]; then
+    echo "Initializing bench..."
+    bench init frappe-bench --frappe-branch version-14
+    cd /home/frappe/frappe-bench
+fi
 
 # Check if site exists, if not create it
 if [ ! -d "/home/frappe/frappe-bench/sites/ithm.local" ]; then
