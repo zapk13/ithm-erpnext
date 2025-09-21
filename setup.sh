@@ -91,15 +91,8 @@ sudo mysql -u root -p12345 -e "FLUSH PRIVILEGES;"
 print_status "Installing Frappe Bench..."
 python3.11 -m pip install frappe-bench
 
-# Create frappe user
-print_status "Creating frappe user..."
-sudo adduser frappe --disabled-password --gecos "" || true
-sudo usermod -aG sudo frappe || true
-
-# Install ERPNext as frappe user
+# Install ERPNext directly (no frappe user needed in Codespaces)
 print_status "Installing ERPNext..."
-sudo -u frappe bash << 'EOF'
-cd /home/frappe
 python3.11 -m pip install frappe-bench
 bench init frappe-bench --frappe-branch version-14 --python python3.11
 cd frappe-bench
@@ -108,47 +101,42 @@ bench --site ithm.local install-app erpnext
 bench --site ithm.local install-app education
 bench config set-common-config -c developer_mode 1
 bench config set-common-config -c file_watch 1
-EOF
 
 # Create ITHM configuration
 print_status "Creating ITHM configuration..."
-sudo -u frappe bash << 'EOF'
-cd /home/frappe/frappe-bench
 bench --site ithm.local set-config company_name "Institute of Tourism and Hospitality Management"
 bench --site ithm.local set-config company_abbr "ITHM"
 bench --site ithm.local set-config default_currency "PKR"
 bench --site ithm.local set-config country "Pakistan"
 bench --site ithm.local set-config timezone "Asia/Karachi"
-EOF
 
 # Create startup script
 print_status "Creating startup script..."
-sudo tee /home/frappe/start-ithm.sh > /dev/null << 'EOF'
+tee start-ithm.sh > /dev/null << 'EOF'
 #!/bin/bash
-cd /home/frappe/frappe-bench
+cd frappe-bench
 bench start
 EOF
 
-sudo chmod +x /home/frappe/start-ithm.sh
-sudo chown frappe:frappe /home/frappe/start-ithm.sh
+chmod +x start-ithm.sh
 
 # Create management script
 print_status "Creating management script..."
-sudo tee /usr/local/bin/ithm-manage > /dev/null << 'EOF'
+tee ithm-manage > /dev/null << 'EOF'
 #!/bin/bash
 case "$1" in
     start)
-        sudo -u frappe bash -c "cd /home/frappe/frappe-bench && bench start" &
+        cd frappe-bench && bench start &
         echo "ITHM ERPNext started"
         ;;
     stop)
-        sudo pkill -f "bench start"
+        pkill -f "bench start"
         echo "ITHM ERPNext stopped"
         ;;
     restart)
-        sudo pkill -f "bench start"
+        pkill -f "bench start"
         sleep 2
-        sudo -u frappe bash -c "cd /home/frappe/frappe-bench && bench start" &
+        cd frappe-bench && bench start &
         echo "ITHM ERPNext restarted"
         ;;
     status)
@@ -159,7 +147,7 @@ case "$1" in
         fi
         ;;
     logs)
-        sudo -u frappe bash -c "cd /home/frappe/frappe-bench && bench --site ithm.local logs"
+        cd frappe-bench && bench --site ithm.local logs
         ;;
     *)
         echo "Usage: ithm-manage {start|stop|restart|status|logs}"
@@ -168,11 +156,11 @@ case "$1" in
 esac
 EOF
 
-sudo chmod +x /usr/local/bin/ithm-manage
+chmod +x ithm-manage
 
 # Start ERPNext
 print_status "Starting ERPNext..."
-sudo -u frappe bash -c "cd /home/frappe/frappe-bench && bench start" &
+cd frappe-bench && bench start &
 
 # Wait for services to be ready
 print_status "Waiting for services to start..."
@@ -190,7 +178,7 @@ echo "   Username: Administrator"
 echo "   Password: admin"
 echo ""
 echo "📁 Installation Directory:"
-echo "   /home/frappe/frappe-bench/"
+echo "   ./frappe-bench/"
 echo ""
 echo "🔧 Management Commands:"
 echo "   Start:   ithm-manage start"
