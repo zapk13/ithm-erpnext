@@ -24,6 +24,27 @@ This repository contains all the configuration files needed to set up ERPNext fo
 
 ## Quick Setup
 
+### Option 1: Complete Automated Setup (Recommended)
+
+**For Linux/Ubuntu:**
+```bash
+chmod +x auto-setup.sh
+./auto-setup.sh
+```
+
+**For Windows:**
+```cmd
+auto-setup.bat
+```
+
+**For GitHub Codespaces:**
+```bash
+chmod +x codespace-setup.sh
+./codespace-setup.sh
+```
+
+### Option 2: Manual Setup
+
 1. **Install ERPNext** (separate installation):
    ```bash
    pip3 install frappe-bench
@@ -46,6 +67,35 @@ This repository contains all the configuration files needed to set up ERPNext fo
    ```
 
 4. **Access**: http://ithm.local:8000 (admin/admin)
+
+## Automated Setup Features
+
+The automated setup scripts handle everything:
+
+✅ **Prerequisites Installation**:
+- Python 3, Node.js, MariaDB, Redis
+- All required system packages
+- Development tools and dependencies
+
+✅ **ERPNext Installation**:
+- Frappe Bench installation
+- ERPNext core application
+- Education module installation
+- Site creation and configuration
+
+✅ **ITHM Configuration**:
+- Company setup for ITHM
+- PKR currency configuration
+- Campus setup (Karachi, Lahore, Islamabad)
+- User roles and permissions
+- Academic programs structure
+- Fee management system
+
+✅ **Service Management**:
+- Systemd service (Linux) / Windows service
+- Auto-start on boot
+- Management commands
+- Log monitoring
 
 ## Configuration Files
 
