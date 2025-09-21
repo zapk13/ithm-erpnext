@@ -1,31 +1,20 @@
-# ERPNext specific
-sites/*/private/backups/*
-sites/*/private/files/*
-sites/*/error.log
-sites/*/access.log
-sites/*/site_config.json
-sites/*/locks/*
-sites/*/task-logs/*
-
-# Database
-*.sql
-*.db
-
-# Logs
-logs/*
+# ERPNext
+frappe-bench/
+sites/
+logs/
 *.log
 
 # Python
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
+*.py[cod]
+*$py.class
+*.so
 .Python
 env/
 venv/
-.venv/
-pip-log.txt
-pip-delete-this-directory.txt
+ENV/
+env.bak/
+venv.bak/
 
 # Node.js
 node_modules/
@@ -33,19 +22,22 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Docker
-.docker/
+# Database
+*.db
+*.sqlite3
 
 # IDE
-.vscode/settings.json
+.vscode/
 .idea/
 *.swp
 *.swo
-*~
 
 # OS
 .DS_Store
 Thumbs.db
+
+# Docker
+.docker/
 
 # Environment variables
 .env
@@ -54,29 +46,6 @@ Thumbs.db
 .env.test.local
 .env.production.local
 
-# Temporary files
-*.tmp
-*.temp
-.cache/
-
 # Backup files
-*.backup
 *.bak
-
-# SSL certificates
-*.pem
-*.key
-*.crt
-
-# Custom configurations (keep templates)
-sites/*/site_config.json
-!sites/common_site_config.json
-
-# Frappe specific
-apps/*/.*
-!apps/*/.gitignore
-!apps/*/README.md
-
-# Build artifacts
-build/
-dist/
+*.backup

@@ -1,0 +1,89 @@
+{
+  "company": {
+    "name": "Institute of Tourism and Hospitality Management",
+    "abbr": "ITHM",
+    "country": "India",
+    "default_currency": "INR"
+  },
+  "campuses": [
+    {
+      "name": "Main Campus - Delhi",
+      "address": "Delhi, India",
+      "is_main": true
+    },
+    {
+      "name": "Sub Campus - Mumbai",
+      "address": "Mumbai, India",
+      "is_main": false
+    },
+    {
+      "name": "Sub Campus - Bangalore",
+      "address": "Bangalore, India",
+      "is_main": false
+    }
+  ],
+  "programs": [
+    {
+      "name": "Bachelor of Tourism Management",
+      "duration": "3 years",
+      "program_type": "Undergraduate"
+    },
+    {
+      "name": "Master of Hospitality Management",
+      "duration": "2 years",
+      "program_type": "Postgraduate"
+    },
+    {
+      "name": "Diploma in Tourism",
+      "duration": "1 year",
+      "program_type": "Diploma"
+    },
+    {
+      "name": "Certificate in Hotel Management",
+      "duration": "6 months",
+      "program_type": "Certificate"
+    }
+  ],
+  "departments": [
+    "Tourism Management",
+    "Hospitality Management",
+    "Hotel Management",
+    "Travel and Tourism",
+    "Event Management",
+    "Culinary Arts"
+  ],
+  "user_roles": [
+    {
+      "role": "Director",
+      "permissions": ["all"]
+    },
+    {
+      "role": "Campus Head",
+      "permissions": ["campus_management", "student_management", "staff_management"]
+    },
+    {
+      "role": "Academic Coordinator",
+      "permissions": ["course_management", "student_management", "academic_records"]
+    },
+    {
+      "role": "Admission Officer",
+      "permissions": ["admission_management", "student_management"]
+    },
+    {
+      "role": "Finance Officer",
+      "permissions": ["fee_management", "financial_reports"]
+    },
+    {
+      "role": "Staff",
+      "permissions": ["basic_student_view", "course_view"]
+    }
+  ],
+  "fee_structure": {
+    "admission_fee": 5000,
+    "tuition_fee_per_semester": 25000,
+    "examination_fee": 2000,
+    "library_fee": 1000,
+    "hostel_fee": 15000,
+    "transport_fee": 5000
+  }
+}
