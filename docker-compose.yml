@@ -37,6 +37,7 @@ services:
   erpnext:
     build: .
     restart: always
+    command: ["bash", "/home/frappe/frappe-bench/start.sh"]
     environment:
       - DB_HOST=db
       - DB_PORT=3306

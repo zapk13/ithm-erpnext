@@ -50,7 +50,7 @@
       }
     }
   },
-  "postCreateCommand": "bash .devcontainer/setup.sh",
+  "postCreateCommand": "echo 'ERPNext Education Portal starting...' && sleep 10",
   "remoteUser": "frappe",
   "features": {
     "ghcr.io/devcontainers/features/git:1": {},
