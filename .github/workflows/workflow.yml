@@ -57,42 +57,99 @@ jobs:
       run: |
         echo "Testing ERPNext container startup with docker-compose..."
         
-        # Start services with docker-compose
-        docker-compose up -d db redis-cache redis-queue redis-socketio
+        # Create a test docker-compose override file with different ports
+        cat > docker-compose.test.yml << 'EOF'
+        version: '3.8'
+        services:
+          db:
+            image: mariadb:10.6
+            restart: always
+            environment:
+              MYSQL_ROOT_PASSWORD: admin123
+              MYSQL_DATABASE: erpnext
+              MYSQL_USER: erpnext
+              MYSQL_PASSWORD: erpnext123
+            ports:
+              - "3307:3306"  # Use different port to avoid conflicts
+            command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+
+          redis-cache:
+            image: redis:alpine
+            restart: always
+            ports:
+              - "6380:6379"  # Use different port
+
+          redis-queue:
+            image: redis:alpine
+            restart: always
+            ports:
+              - "6381:6379"  # Use different port
+
+          redis-socketio:
+            image: redis:alpine
+            restart: always
+            ports:
+              - "6382:6379"  # Use different port
+
+          erpnext:
+            build: .
+            restart: always
+            environment:
+              - DB_HOST=db
+              - DB_PORT=3306
+              - DB_NAME=erpnext
+              - DB_USER=erpnext
+              - DB_PASSWORD=erpnext123
+              - REDIS_CACHE_URL=redis://redis-cache:6379
+              - REDIS_QUEUE_URL=redis://redis-queue:6379
+              - REDIS_SOCKETIO_URL=redis://redis-socketio:6379
+              - SOCKETIO_PORT=9000
+            ports:
+              - "8001:8000"  # Use different port
+              - "9001:9000"  # Use different port
+            depends_on:
+              - db
+              - redis-cache
+              - redis-queue
+              - redis-socketio
+        EOF
+        
+        # Start services with test configuration
+        docker-compose -f docker-compose.test.yml up -d db redis-cache redis-queue redis-socketio
         
         # Wait for services to be ready
         echo "Waiting for database and Redis services..."
         sleep 30
         
         # Check if services are running
-        docker-compose ps
+        docker-compose -f docker-compose.test.yml ps
         
         # Test the ERPNext container build
         echo "Building ERPNext container..."
-        docker-compose build erpnext
+        docker-compose -f docker-compose.test.yml build erpnext
         
         # Start ERPNext container
         echo "Starting ERPNext container..."
-        docker-compose up -d erpnext
+        docker-compose -f docker-compose.test.yml up -d erpnext
         
         # Wait for ERPNext to initialize
         echo "Waiting for ERPNext to initialize..."
         sleep 60
         
         # Check if ERPNext container is running
-        docker-compose ps erpnext
+        docker-compose -f docker-compose.test.yml ps erpnext
         
         # Check logs for any critical errors
         echo "Checking ERPNext logs..."
-        docker-compose logs erpnext
+        docker-compose -f docker-compose.test.yml logs erpnext
         
         # Test if ERPNext is responding
         echo "Testing ERPNext response..."
-        curl -f http://localhost:8000 || echo "ERPNext not responding yet"
+        curl -f http://localhost:8001 || echo "ERPNext not responding yet"
         
         # Cleanup
         echo "Cleaning up test containers..."
-        docker-compose down -v
+        docker-compose -f docker-compose.test.yml down -v
 
   build-and-push:
     needs: test
