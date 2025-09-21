@@ -23,12 +23,18 @@ USER frappe
 WORKDIR /home/frappe/frappe-bench
 
 # Copy configuration files
-COPY --chown=frappe:frappe ./apps/education ./apps/education
 COPY --chown=frappe:frappe ./sites/common_site_config.json ./sites/common_site_config.json
 COPY --chown=frappe:frappe ./sites/ithm.local ./sites/ithm.local
+
+# Copy apps if they exist
+COPY --chown=frappe:frappe ./apps ./apps
+
+# Copy start script
+COPY --chown=frappe:frappe ./start.sh ./start.sh
+RUN chmod +x ./start.sh
 
 # Expose ports
 EXPOSE 8000 9000 6787
 
 # Start command
-CMD ["bash", "/home/frappe/frappe-bench/start.sh"]
+CMD ["bash", "./start.sh"]
