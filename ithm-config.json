@@ -2,23 +2,23 @@
   "company": {
     "name": "Institute of Tourism and Hospitality Management",
     "abbr": "ITHM",
-    "country": "India",
-    "default_currency": "INR"
+    "country": "Pakistan",
+    "default_currency": "PKR"
   },
   "campuses": [
     {
-      "name": "Main Campus - Delhi",
-      "address": "Delhi, India",
+      "name": "Main Campus - Karachi",
+      "address": "Karachi, Pakistan",
       "is_main": true
     },
     {
-      "name": "Sub Campus - Mumbai",
-      "address": "Mumbai, India",
+      "name": "Sub Campus - Lahore",
+      "address": "Lahore, Pakistan",
       "is_main": false
     },
     {
-      "name": "Sub Campus - Bangalore",
-      "address": "Bangalore, India",
+      "name": "Sub Campus - Islamabad",
+      "address": "Islamabad, Pakistan",
       "is_main": false
     }
   ],
